@@ -6,14 +6,28 @@ This workshop assumes you have access to **Claude Code via Positron**. Start wit
 
 ## Getting the Workshop Files
 
-**Easiest — download as a ZIP:**
+**Download as a ZIP:**
 
 1. Go to [https://github.com/YaleLibraryStatLab/workshops](https://github.com/YaleLibraryStatLab/workshops)
 2. Click the green **Code** button > **Download ZIP**
 3. Unzip the file and locate the `intro-claude/` folder
 4. In Positron, go to **File > Open Folder** and select the `intro-claude/` folder
 
-**Via terminal:**
+**Via Positron (Git clone):**
+
+1. Open the Command Palette: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+2. Type **Git: Clone** and select it
+3. Paste: `https://github.com/YaleLibraryStatLab/workshops.git` and choose a local folder
+4. When cloning finishes, go to **File > Open Folder** and select the `intro-claude/` subfolder
+
+**Download Via Positron:**
+
+1. Open the Command Palette: `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows/Linux)
+2. Type **Git: Clone** and select it
+3. Paste: `https://github.com/YaleLibraryStatLab/workshops.git` and choose a local folder
+4. When cloning finishes, go to **File > Open Folder** and select the `intro-claude/` subfolder
+
+**Download Via terminal:**
 
 ```bash
 git clone https://github.com/YaleLibraryStatLab/workshops.git
