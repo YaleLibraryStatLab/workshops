@@ -8,12 +8,20 @@ Make a plan to review the data under the data/nhanes folder, inspect the data, i
 
 ## Collect Summary Statistics
 
-Write an R script "02-data-discovery.R" begin by importing the merged dataset. For the following demographic variables — RIDAGEYR (age), RIAGENDR (sex), RIDRETH1 (race/Hispanic origin), DMDEDUC2 (education level, adults 20+), and INDFMPIR (income-to-poverty ratio) — identify the R object type of each variable, and then plot the histogram for each distribution as well as its five-figure summary. Save the outputs to presentation/images (create these folders if they do not already exist.) Each figure should include the script prefix (02), the name of the demographic variable, be grey scaled, and saved as a png.
+Write an R script "02-data-discovery.R" that imports the merged dataset. For the demographic variable RIDAGEYR (age in years), identify its R object type, plot its histogram, and compute its five-number summary. Save the figure to presentation/images (create this folder if it does not already exist); the filename should include the script prefix (02) and the variable name, be greyscaled, and saved as a png.
 
 
 ## Explore Demographic Data
 
 Use commments to block off a new section in 02-data-discovery.R, please create some cross-tabs to show the relationships between income (INDFMPIR) and gender (RIAGENDR) on diabetes diagnosis (DIQ010 == 1, excluding refused/don't know responses). Compile these results into a single tidy table with one row per demographic category (e.g. "Male", "Female", "Income: <1x poverty") and columns for the source variable, the category label, the sample size, the probability of a diabetes diagnosis, and the difference in that probability relative to a reference category for each variable (e.g. Male as the reference for gender, the lowest income bracket as the reference for income). Save this table to presentation/tables (create this folder if it does not already exist) and quickly summarize the output.
+
+## Explore the Survival Data
+
+Before analyzing data/tcga/brca_rotterdam_survival.csv, run a general data quality check: print the dimensions and column types, then for every variable report either a five-number summary (continuous) or a full value-count table (categorical/binary). Flag anything that looks unusual — a category with very few observations, a group size that seems implausible for this kind of dataset, values outside a reasonable range, or high missingness. Summarize your findings in plain language.
+
+## Sanity-Check the Survival Data
+
+Load data/tcga/brca_rotterdam_survival.csv and perform a distributional check on the er_status column before running any models: print its value counts, cross-tabulate it against the continuous er variable, and summarize what you find. Do the group sizes look plausible for a breast cancer cohort? If you detect a problem, explain what is wrong, propose a corrected derivation, and add the new variable to the dataframe.
 
 ## Run a Survival Analysis
 
