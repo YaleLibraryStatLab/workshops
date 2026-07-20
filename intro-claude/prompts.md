@@ -1,36 +1,138 @@
-## 
+# Workshop Prompts
 
-Attached are some sample prompts to follow when working through our vignettes. 
+Example prompts to follow along with the demos. Most of these also appear on
+the slides (`02 - intro to claude code.pdf`).
 
-## Plan Merger
+**How to use them**
 
-Make a plan to review the data under the data/nhanes folder, inspect the data, identify common variables and keys to merge the data and save the results to a new dataframe. You may read the data to identify a common key.
+1. Open the demo folder listed for each section (**File > Open Folder** in
+   Positron), so Claude Code starts in the right place.
+2. Paste the prompt into Claude Code.
+3. **Review each action before you approve it.** The point of the workshop is
+   delegation *with* review, not autopilot.
 
-## Collect Summary Statistics
+The two demo folders:
 
-Write an R script "02-data-discovery.R" that imports the merged dataset. For the demographic variable RIDAGEYR (age in years), identify its R object type, plot its histogram, and compute its five-number summary. Save the figure to presentation/images (create this folder if it does not already exist); the filename should include the script prefix (02) and the variable name, be greyscaled, and saved as a png.
+| Folder | Used in |
+|--------|---------|
+| `demo/messy-project/` | Demo 1 |
+| `demo/data-analysis/` | Demos 2 and 3 |
 
+---
 
-## Explore Demographic Data
+## Warm-up
 
-Use commments to block off a new section in 02-data-discovery.R, please create some cross-tabs to show the relationships between income (INDFMPIR) and gender (RIAGENDR) on diabetes diagnosis (DIQ010 == 1, excluding refused/don't know responses). Compile these results into a single tidy table with one row per demographic category (e.g. "Male", "Female", "Income: <1x poverty") and columns for the source variable, the category label, the sample size, the probability of a diabetes diagnosis, and the difference in that probability relative to a reference category for each variable (e.g. Male as the reference for gender, the lowest income bracket as the reference for income). Save this table to presentation/tables (create this folder if it does not already exist) and quickly summarize the output.
+Open any demo folder, then get your bearings before changing anything:
 
-## Explore the Survival Data
+```text
+What files are in this project? Give me a brief summary.
+```
 
-Before analyzing data/tcga/brca_rotterdam_survival.csv, run a general data quality check: print the dimensions and column types, then for every variable report either a five-number summary (continuous) or a full value-count table (categorical/binary). Flag anything that looks unusual — a category with very few observations, a group size that seems implausible for this kind of dataset, values outside a reasonable range, or high missingness. Summarize your findings in plain language.
+---
 
-## Sanity-Check the Survival Data
+## Demo 1 — Tidy a Project Folder
 
-Load data/tcga/brca_rotterdam_survival.csv and perform a distributional check on the er_status column before running any models: print its value counts, cross-tabulate it against the continuous er variable, and summarize what you find. Do the group sizes look plausible for a breast cancer cohort? If you detect a problem, explain what is wrong, propose a corrected derivation, and add the new variable to the dataframe.
+**Open:** `demo/messy-project/`
 
-## Run a Survival Analysis
+A folder every researcher recognizes: `final_FINAL_v3.R`, `data (1).csv`,
+stray notes, no structure. Ask Claude to plan first, then act.
 
-Write an R script "03-survival-analysis.R" that imports data/tcga/brca_rotterdam_survival.csv. Fit a Kaplan-Meier survival curve for overall survival (dtime/death) stratified by ER status (er_status), and a Cox proportional hazards model for overall survival using age, tumor grade, number of positive nodes, hormonal therapy (hormon), and chemotherapy (chemo) as covariates, stratified by er_status. Save the Kaplan-Meier curve (greyscaled, with the script prefix in the filename) to presentation/images, and save a tidy table of the Cox model coefficients (including hazard ratios and confidence intervals, via broom::tidy()) to presentation/tables.
+```text
+Look at every file in this folder.
 
-## Interpret the Results
+Propose a folder structure (data, scripts, notes, archive)
+and a consistent naming scheme.
 
-Using the Kaplan-Meier plot and Cox model table produced by 03-survival-analysis.R, summarize the findings in plain language: how does ER status relate to overall survival, which covariates are significantly associated with the hazard of death, and what do the hazard ratios mean in practical terms? Note any results that warrant a closer look, such as violations of the proportional hazards assumption.
+Wait for my approval, then move and rename the files and
+write a README.md describing the layout.
 
-## Cross-Validate the Results
+Do not delete anything.
+```
 
-Invoke the /cross-lang-verify skill on 03-survival-analysis.R to replicate the Kaplan-Meier and Cox model results in Python (using lifelines), and confirm that the log-rank statistic, Cox coefficients/hazard ratios, and median survival times agree to 4 decimal places. Report any mismatches and their likely cause.
+Note the three protections: **propose first, wait for approval, never delete.**
+Tip: cycle into Plan Mode with `Shift + Tab` before sending this.
+
+---
+
+## Demo 2 — Download, Check, Summarize
+
+**Open:** `demo/data-analysis/`
+
+Real, live data from Our World in Data. The project's `CLAUDE.md` tells Claude
+where to save things and to inspect data with a script rather than reading it
+directly; a hook enforces that rule.
+
+```text
+If data/life-expectancy.csv is missing or more than 30 days
+old, download a fresh copy from
+https://ourworldindata.org/grapher/life-expectancy.csv
+
+Then summarize it: the 5 highest and 5 lowest countries in
+the most recent year, and the global trend since 1950.
+
+Save a table to output/tables/ and a plot to
+output/figures/, and report what you did.
+```
+
+### Optional: profile with the data plugin
+
+Install Anthropic's **data** plugin (`/plugin` > Discover), then:
+
+```text
+Profile and validate data/life-expectancy.csv: report column
+types, ranges, missingness, and anything that looks off.
+```
+
+---
+
+## Demo 3 — Cross-Language Verification
+
+**Open:** `demo/data-analysis/`
+
+Run an analysis in R, then reproduce it in Python and confirm the numbers
+agree. The `cross-lang-verify` skill already ships in this folder
+(`.claude/skills/cross-lang-verify/`).
+
+**Step 1 — analyze in R:**
+
+```text
+Download the US unemployment rate series from FRED
+(https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE)
+into data/, then write an R script in scripts/ that reports
+the mean rate over the full series and the average rate over
+the most recent 12 months, and saves a line plot of the
+series to output/figures/.
+
+Run the script and report the key numbers.
+```
+
+**Step 2 — verify in Python:**
+
+```text
+Use the cross-lang-verify skill to replicate that analysis in
+Python and confirm the full-series mean and the recent
+12-month average agree to 4 decimal places. Report VERIFIED
+or MISMATCH with the exact values.
+```
+
+A match is not a proof, but it is a strong check against transcription errors,
+package defaults, and silent mistakes.
+
+---
+
+## Optional: Keep Data Fresh with `/loop`
+
+**Open:** `demo/data-analysis/`
+
+`/loop` reruns a prompt on a schedule — handy for keeping a dataset current
+during a work session. Leave this for the end, and remember Security Rule 3: a
+repeating task is the *last* place to skip permission prompts.
+
+```text
+/loop 30m If data/life-expectancy.csv is missing or more than
+1 day old, download a fresh copy from
+https://ourworldindata.org/grapher/life-expectancy.csv and
+rerun the summary. Otherwise, do nothing.
+```
+
+Stop the loop when you are done: press `Esc`, or run `/loop` again to manage it.

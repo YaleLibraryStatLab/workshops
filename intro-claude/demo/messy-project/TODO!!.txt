@@ -1,0 +1,4 @@
+URGENT
+1. clean this folder up
+2. figure out which analysis script is current
+3. back up the data somewhere sensible

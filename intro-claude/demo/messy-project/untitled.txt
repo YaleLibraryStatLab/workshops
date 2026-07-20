@@ -1,0 +1,4 @@
+ideas
+- maybe control for age?
+- check if the 2019 wave has the same items
+- email Sam about the codebook
