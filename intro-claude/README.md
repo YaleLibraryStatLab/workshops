@@ -4,6 +4,20 @@ This workshop assumes you have access to **Claude Code via Positron**. Start wit
 
 ---
 
+## What You Need for This Workshop
+
+Please set these up **before** the session. Full step-by-step instructions (Mac and Windows) are in the installation guide (`01 - installation-guide.pdf`).
+
+1. **Claude Code installed** — the command-line tool, or, optionally, the Claude Code extension for Positron or VS Code.
+2. **R and Python installed** — the demos use both languages.
+3. **The Python packages** — `pandas` and `matplotlib` (`pip install pandas matplotlib`). The R demos use base R only, so no extra R packages are needed.
+
+> **Please install everything ahead of time.** Claude Code *can* install these for you during the session, but doing so spends tokens/credits on setup instead of learning. Coming in ready means you get to spend the whole workshop on exploring what Claude Code can do.
+
+Not sure something installed correctly? The installation guide ends with a checklist and a Common Issues page, and you can book pre-workshop setup help with a StatLab Consultant (see the guide's "Need Help?" page).
+
+---
+
 ## Getting the Workshop Files
 
 **Download as a ZIP (recommended):**
